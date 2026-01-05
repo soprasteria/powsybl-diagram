@@ -99,8 +99,8 @@ public class Atlas2ForceLayout extends AbstractLayout {
                 .collect(Collectors.toMap(
                         nodePosition -> graph.getNode(nodePosition.getKey()).orElseThrow(),
                         nodePosition -> new Point(
-                                nodePosition.getValue().getX() / scale,
-                                nodePosition.getValue().getY() / scale)
+                                nodePosition.getValue().x() / scale,
+                                nodePosition.getValue().y() / scale)
                 ));
         layoutContext.setInitialPoints(initialPoints);
     }
