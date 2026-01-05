@@ -13,6 +13,7 @@ package com.powsybl.diagram.util.layout.algorithms.parameters;
  */
 public final class BasicForceLayoutParameters {
     private static final int DEFAULT_MAX_STEPS = 400;
+    private static final int DEFAULT_MAX_DURATION_SECONDS = 15;
     private static final double DEFAULT_MIN_ENERGY_THRESHOLD = 0.001;
     private static final double DEFAULT_DELTA_TIME = 0.1;
     private static final double DEFAULT_REPULSION = 800.0;
@@ -22,6 +23,7 @@ public final class BasicForceLayoutParameters {
     private static final boolean DEFAULT_ACTIVATE_ATTRACT_TO_CENTER_FORCE = true;
 
     private final int maxSteps;
+    private final double timeoutSeconds;
     private final double minEnergyThreshold;
     private final double deltaTime;
     private final double repulsion;
@@ -32,6 +34,7 @@ public final class BasicForceLayoutParameters {
 
     private BasicForceLayoutParameters(
             int maxSteps,
+            double timeoutSeconds,
             double minEnergyThreshold,
             double deltaTime,
             double repulsion,
@@ -41,6 +44,7 @@ public final class BasicForceLayoutParameters {
             boolean activateAttractToCenterForce
     ) {
         this.maxSteps = maxSteps;
+        this.timeoutSeconds = timeoutSeconds;
         this.minEnergyThreshold = minEnergyThreshold;
         this.deltaTime = deltaTime;
         this.repulsion = repulsion;
@@ -52,6 +56,7 @@ public final class BasicForceLayoutParameters {
 
     public static class Builder {
         private int maxSteps = DEFAULT_MAX_STEPS;
+        private double timeoutSeconds = DEFAULT_MAX_DURATION_SECONDS;
         private double minEnergyThreshold = DEFAULT_MIN_ENERGY_THRESHOLD;
         private double deltaTime = DEFAULT_DELTA_TIME;
         private double repulsion = DEFAULT_REPULSION;
@@ -68,6 +73,11 @@ public final class BasicForceLayoutParameters {
          */
         public Builder withMaxSteps(int maxSteps) {
             this.maxSteps = maxSteps;
+            return this;
+        }
+
+        public Builder withTimeoutSeconds(double timeoutSeconds) {
+            this.timeoutSeconds = timeoutSeconds;
             return this;
         }
 
@@ -152,6 +162,7 @@ public final class BasicForceLayoutParameters {
         public BasicForceLayoutParameters build() {
             return new BasicForceLayoutParameters(
                     maxSteps,
+                    timeoutSeconds,
                     minEnergyThreshold,
                     deltaTime,
                     repulsion,
@@ -165,6 +176,10 @@ public final class BasicForceLayoutParameters {
 
     public int getMaxSteps() {
         return maxSteps;
+    }
+
+    public double getTimeoutSeconds() {
+        return timeoutSeconds;
     }
 
     public double getMinEnergyThreshold() {
