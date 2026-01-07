@@ -177,8 +177,8 @@ public final class NodeFactory {
         return createFeederBranchNode(graph, id, name, equipmentId, SldComponentTypeName.LINE, side, otherSideVoltageLevelInfos);
     }
 
-    public static FeederNode createFeederTeePointLegNode(VoltageLevelGraph graph, String id, String name, String equipmentId, String componentType, NodeSide side, VoltageLevelInfos otherSideVoltageLevelInfos, FeederType feederType) {
-        return createFeederNode(graph, id, name, equipmentId, componentType, new FeederTeePointLeg(feederType, side, graph.getVoltageLevelInfos(), otherSideVoltageLevelInfos));
+    public static FeederNode createFeederTeePointLegNode(VoltageLevelGraph graph, String id, String name, String equipmentId, NodeSide side, VoltageLevelInfos otherSideVoltageLevelInfos, FeederType feederType) {
+        return createFeederNode(graph, id, name, equipmentId, TEE_POINT, new FeederTeePointLeg(feederType, side, graph.getVoltageLevelInfos(), otherSideVoltageLevelInfos));
     }
 
     public static FeederNode createFeederTwtLegNode(VoltageLevelGraph graph, String id, String name, String equipmentId, String componentType, NodeSide side, VoltageLevelInfos otherSideVoltageLevelInfos, FeederType feederType) {
@@ -201,12 +201,8 @@ public final class NodeFactory {
         return createFeederTwtLegNode(graph, id, name, equipmentId, THREE_WINDINGS_TRANSFORMER_LEG, side, graph.getVoltageLevelInfos(), FeederType.THREE_WINDINGS_TRANSFORMER_LEG);
     }
 
-    public static FeederNode createFeederTeePointNode(VoltageLevelGraph graph, String id, String name, String equipmentId, String componentType, NodeSide side, VoltageLevelInfos otherSideVoltageLevelInfos, FeederType feederType) {
-        return createFeederNode(graph, id, name, equipmentId, componentType, new FeederTwLeg(feederType, side, graph.getVoltageLevelInfos(), otherSideVoltageLevelInfos));
-    }
-
     public static FeederNode createFeederTeePointgNodeForVoltageLevelDiagram(VoltageLevelGraph graph, String id, String name, String equipmentId, NodeSide side, VoltageLevelInfos otherSideVoltageLevelInfos) {
-        return createFeederTeePointLegNode(graph, id, name, equipmentId, TEE_POINT, side, otherSideVoltageLevelInfos, FeederType.TEE_POINT_LEG);
+        return createFeederTeePointLegNode(graph, id, name, equipmentId, side, otherSideVoltageLevelInfos, FeederType.TEE_POINT_LEG);
     }
 
     public static ConnectivityNode createConnectivityNode(VoltageLevelGraph graph, String id) {
