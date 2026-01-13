@@ -7,8 +7,6 @@
  */
 package com.powsybl.sld.svg;
 
-import com.powsybl.sld.model.nodes.BranchEdge;
-import com.powsybl.sld.model.nodes.Node;
 import com.powsybl.sld.util.IdUtil;
 
 /**
@@ -23,12 +21,20 @@ public class LegacyIdProvider implements IdProvider {
     }
 
     @Override
-    public String createId(BranchEdge edge) {
-        return IdUtil.escapeId(prefixId + edge.getId());
+    public String createSvgId(String equipmentId) {
+        return IdUtil.escapeId(prefixId + equipmentId);
     }
 
     @Override
-    public String createId(Node node) {
-        return IdUtil.escapeId(prefixId + node.getId());
+    public String createSvgId(String equipmentId, String subType) {
+        return IdUtil.escapeId(prefixId + equipmentId + "_" + subType);
+    }
+
+    @Override
+    public String createSvgId(String containerId, String id1, String id2) {
+        // For global unicity in all type of container (voltage level, substation, zone), we prefix with the container Id and
+        // we rely on the fact that node ids are unique inside a voltage level. We also prepend with a custom prefix id to
+        // allow multiple diagrams unicity.
+        return IdUtil.escapeClassName(prefixId + "_" + containerId + "_" + id1 + "_" + id2);
     }
 }

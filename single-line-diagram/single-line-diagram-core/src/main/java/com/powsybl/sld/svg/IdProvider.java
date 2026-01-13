@@ -7,14 +7,13 @@
  */
 package com.powsybl.sld.svg;
 
-import com.powsybl.sld.model.nodes.BranchEdge;
-import com.powsybl.sld.model.nodes.Node;
-
 /**
  * @author Florian Dupuy {@literal <florian.dupuy at rte-france.com>}
  */
 public interface IdProvider {
-    String createId(BranchEdge edge);
+    String createSvgId(String equipmentId);
 
-    String createId(Node node);
+    String createSvgId(String equipmentId, String subType);
+
+    String createSvgId(String containerId, String id1, String id2);
 }

@@ -7,9 +7,6 @@
  */
 package com.powsybl.sld.svg;
 
-import com.powsybl.sld.model.nodes.BranchEdge;
-import com.powsybl.sld.model.nodes.Node;
-
 /**
  * @author Florian Dupuy {@literal <florian.dupuy at rte-france.com>}
  */
@@ -24,12 +21,21 @@ public class DefaultIdProvider implements IdProvider {
     }
 
     @Override
-    public String createId(BranchEdge edge) {
-        return prefixId + count++;
+    public String createSvgId(String equipmentId) {
+        return nextId();
     }
 
     @Override
-    public String createId(Node node) {
+    public String createSvgId(String equipmentId, String subType) {
+        return nextId();
+    }
+
+    @Override
+    public String createSvgId(String containerId, String id1, String id2) {
+        return nextId();
+    }
+
+    private String nextId() {
         return prefixId + count++;
     }
 }
