@@ -179,7 +179,7 @@ public class CountryGraphBuilder implements GraphBuilder {
                 BranchEdge.LINE_EDGE,
                 edgeInfo1.orElse(null),
                 edgeInfo2.orElse(null),
-                label
+                new EdgeInfo(EdgeInfo.NAME, null, null, label, null)
         );
 
         graph.addEdge(vlNode1, vlNode1.getBusNodes().getFirst(), vlNode2, vlNode2.getBusNodes().getFirst(), edge);

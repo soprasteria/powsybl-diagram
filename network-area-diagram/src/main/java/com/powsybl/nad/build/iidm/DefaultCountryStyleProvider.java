@@ -16,7 +16,6 @@ import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -73,15 +72,16 @@ public class DefaultCountryStyleProvider implements StyleProvider {
     }
 
     @Override
-    public List<String> getEdgeInfoStyleClasses(EdgeInfo info) {
-        List<String> styles = new LinkedList<>();
-        switch (info.getInfoType()) {
-            case EdgeInfo.ACTIVE_POWER -> styles.add(CLASSES_PREFIX + "active");
-            case EdgeInfo.REACTIVE_POWER -> styles.add(CLASSES_PREFIX + "reactive");
-            case EdgeInfo.CURRENT -> styles.add(CLASSES_PREFIX + "current");
-            default -> LOGGER.warn("The \"{}\" type of information is not handled", info.getInfoType());
-        }
-        return styles;
+    public List<String> getEdgeInfoStyleClasses(String infoType) {
+        return switch (infoType) {
+            case EdgeInfo.ACTIVE_POWER -> List.of(CLASSES_PREFIX + "active");
+            case EdgeInfo.REACTIVE_POWER -> List.of(CLASSES_PREFIX + "reactive");
+            case EdgeInfo.CURRENT -> List.of(CLASSES_PREFIX + "current");
+            default -> {
+                LOGGER.warn("The \"{}\" type of information is not handled", infoType);
+                yield List.of();
+            }
+        };
     }
 
     @Override

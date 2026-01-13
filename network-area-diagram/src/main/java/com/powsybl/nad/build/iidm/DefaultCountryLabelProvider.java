@@ -38,7 +38,7 @@ public class DefaultCountryLabelProvider implements CountryLabelProvider {
         double p12TieLines = tieLines.stream().mapToDouble(tl -> getBranchActivePower(edgeInfoCountry, tl.getTerminal1(), tl.getTerminal2())).sum();
         double p12HvdcLines = hvdcLines.stream().mapToDouble(hvdcLine -> getBranchActivePower(edgeInfoCountry, hvdcLine.getConverterStation1().getTerminal(), hvdcLine.getConverterStation2().getTerminal())).sum();
         double totalActivePower = p12Lines + p12TieLines + p12HvdcLines;
-        return Optional.of(new EdgeInfo(EdgeInfo.ACTIVE_POWER, totalActivePower, value -> String.format(Locale.US, "%.1f MW", value)));
+        return Optional.of(new EdgeInfo(null, EdgeInfo.ACTIVE_POWER, totalActivePower, null, String.format(Locale.US, "%.1f MW", totalActivePower)));
     }
 
     /**

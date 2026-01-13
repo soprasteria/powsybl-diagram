@@ -39,9 +39,9 @@ foreignObject.nad-text-nodes {overflow: visible; color: black}
         </g>
     </g>
     <g class="nad-edge-infos">
-        <g id="9" transform="translate(-59.22,-62.33)" class="nad-active">
-            <path transform="rotate(-136.40)" class="nad-arrow-out" d="M-15 0 h5 V20 h20 V0 h5 L0 -20z"/>
-            <text transform="rotate(43.60)" y="34.50" style="text-anchor:middle">1120.0 MW</text>
+        <g id="9" transform="translate(-59.22,-62.33)">
+            <path transform="rotate(-136.40)" class="nad-active nad-arrow-out" d="M-15 0 h5 V20 h20 V0 h5 L0 -20z"/>
+            <text transform="rotate(43.60)" class="nad-active" y="34.50" style="text-anchor:middle">1120.0 MW</text>
         </g>
     </g>
     <g class="nad-text-edges">
