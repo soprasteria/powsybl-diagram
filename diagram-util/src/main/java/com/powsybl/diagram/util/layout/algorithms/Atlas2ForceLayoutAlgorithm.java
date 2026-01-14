@@ -50,7 +50,7 @@ public class Atlas2ForceLayoutAlgorithm<V, E> implements LayoutAlgorithm<V, E> {
     // This was found by launching the algorithm on a lot of graphs and checking after how many steps the graph looked stable
     // We then check the corresponding global graph speed, and made a regression between the number of nodes and the global graph speed at each step
     // this gave a curve y = a * x^b with a = NORMALIZED_STOPPING_VALUE and b = NORMALIZATION_POWER
-    // it means that we can know the graph speed at which the graph is stable, no matter the speed of the graph
+    // It means that we can know the graph speed at which the graph is stable, no matter the speed of the graph
     // The speed is globally decreasing (even though it goes up sometimes). On all the tests that were ran, the global speed
     // reaches this stopping value for the first time when it is stable (meaning it doesn't become stable when it reaches it for the 2nd, 3rd try)
     // meaning we can be confident to stop once we reach this value for the first time
@@ -125,12 +125,12 @@ public class Atlas2ForceLayoutAlgorithm<V, E> implements LayoutAlgorithm<V, E> {
                 // calculate swg(n) for each node the swing of the node
                 // at the same time calculate tra(n) the traction of the node
                 // we can also calculate swg(G) and tra(G) the swing and traction of the graph
-                int vertexDegreePlusOne = layoutContext.getSimpleGraph().degreeOf(entry.getKey()) + 1;
+                int weight = layoutContext.getSimpleGraph().degreeOf(entry.getKey()) + 1;
                 Vector2D previousPointForce = previousForces.get(point);
                 double pointSwing = calculatePointSwing(point, previousPointForce);
                 swingMap.put(point, pointSwing);
-                graphSwing += pointSwing * vertexDegreePlusOne;
-                graphTraction += calculatePointTraction(point, previousPointForce) * vertexDegreePlusOne;
+                graphSwing += pointSwing * weight;
+                graphTraction += calculatePointTraction(point, previousPointForce) * weight;
             }
             if (graphSwing == 0) {
                 // that means that all the points are not moving anymore, or are diverging very fast
