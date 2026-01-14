@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2025, RTE (http://www.rte-france.com)
+ * Copyright (c) 2025-2026, RTE (http://www.rte-france.com)
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -23,18 +23,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/// The code in this class is the implementation of the paper:
-/// Jacomy M, Venturini T, Heymann S, Bastian M (2014)
-/// ForceAtlas2, a Continuous Graph Layout Algorithm for Handy Network Visualization Designed for
-/// the Gephi Software. PLoS ONE 9(6): e98679. doi:10.1371/journal.pone.0098679
-/// The paper requires its usage to credit the original author and the source, DO NOT REMOVE THE ABOVE REFERENCE
-/// Some parts of the code do not directly come from the paper and are instead found through experimenting, to find something that works best
-/// The parts that are not inside the original paper are:
-/// - the choice of a starting global speed for the graph
-/// - a maximum decrease ratio in global speed between each step
-/// - a "quick to calculate" stopping condition
-
 /**
+ * <p>
+ * The code in this class is the implementation of the paper:<br>
+ * Jacomy M, Venturini T, Heymann S, Bastian M (2014) ForceAtlas2,
+ * a Continuous Graph Layout Algorithm for Handy Network Visualization Designed for
+ * the Gephi Software. PLoS ONE 9(6): e98679. doi:10.1371/journal.pone.0098679<br>
+ * The paper requires its usage to credit the original author and the source, DO NOT REMOVE THE ABOVE REFERENCE <br>
+ * Some parts of the code do not directly come from the paper and were instead developed through experimenting, to find something that works best.
+ * The parts that are not inside the original paper are:
+ * <ul>
+ *     <li>the choice of a starting global speed for the graph</li>
+ *     <li>a maximum decrease ratio in global speed between each step</li>
+ *     <li>a "quick to calculate" stopping condition</li>
+ * </ul>
+ * </p>
  * @author Nathan Dissoubray {@literal <nathan.dissoubray at rte-france.com>}
  */
 public class Atlas2ForceLayoutAlgorithm<V, E> implements LayoutAlgorithm<V, E> {
