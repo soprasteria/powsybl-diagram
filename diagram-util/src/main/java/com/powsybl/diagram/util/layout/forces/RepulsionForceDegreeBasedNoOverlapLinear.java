@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2025, RTE (http://www.rte-france.com)
+ * Copyright (c) 2025-2026, RTE (http://www.rte-france.com)
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -16,7 +16,7 @@ import java.util.Map;
 /**
  * @author Nathan Dissoubray {@literal <nathan.dissoubray at rte-france.com>}
  */
-public class RepulsionForceByEdgeNumberNoOverlapLinear<V, E> extends AbstractNoOverlapForce<V, E> {
+public class RepulsionForceDegreeBasedNoOverlapLinear<V, E> extends AbstractNoOverlapForce<V, E> {
     private final double forceIntensityNoOverlap;
     private final double forceIntensityWithOverlap;
     private final double repulsionZoneRatio;
@@ -30,7 +30,7 @@ public class RepulsionForceByEdgeNumberNoOverlapLinear<V, E> extends AbstractNoO
      * @param pointSizeOffset offset for the size of the point, get the size of a point via scale * graph size + offset
      * @param repulsionZoneRatio the zone in which to consider the interaction with other points is a disc of radius repulsionZoneRatio * pointSize
      */
-    public RepulsionForceByEdgeNumberNoOverlapLinear(double forceIntensityNoOverlap, double forceIntensityWithOverlap, double pointSizeScale, double pointSizeOffset, double repulsionZoneRatio) {
+    public RepulsionForceDegreeBasedNoOverlapLinear(double forceIntensityNoOverlap, double forceIntensityWithOverlap, double pointSizeScale, double pointSizeOffset, double repulsionZoneRatio) {
         super(pointSizeScale, pointSizeOffset);
         this.forceIntensityNoOverlap = forceIntensityNoOverlap;
         this.forceIntensityWithOverlap = forceIntensityWithOverlap;
@@ -44,7 +44,7 @@ public class RepulsionForceByEdgeNumberNoOverlapLinear<V, E> extends AbstractNoO
         // init point size
         super.init(layoutContext);
         this.repulsionZoneRadius = this.repulsionZoneRatio * this.pointSize;
-        // TODO init vertex degree, same as AbstractByEdgeNumberForce, maybe we should make that an interface with a default method instead of an abstract class
+        // TODO init vertex degree, same as AbstractDegreeBasedForce, maybe we should make that an interface with a default method instead of an abstract class
         for (Map.Entry<V, Point> entry : layoutContext.getAllPoints().entrySet()) {
             entry.getValue().setPointVertexDegree(layoutContext.getSimpleGraph().degreeOf(entry.getKey()));
         }

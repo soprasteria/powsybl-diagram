@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2025, RTE (http://www.rte-france.com)
+ * Copyright (c) 2025-2026, RTE (http://www.rte-france.com)
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -18,12 +18,12 @@ import java.util.Map;
  * It depends on the number of edges of the points, it's stronger when points are closer and weaker when points are further away.
  * @author Nathan Dissoubray {@literal <nathan.dissoubray at rte-france.com>}
  */
-public class RepulsionForceByEdgeNumberLinear<V, E> extends AbstractByEdgeNumberForce<V, E> {
+public class RepulsionForceDegreeBasedLinear<V, E> extends AbstractDegreeBasedForce<V, E> {
 
     private final double forceIntensity;
     private final boolean effectFromFixedNodes;
 
-    public RepulsionForceByEdgeNumberLinear(double forceIntensity, boolean effectFromFixedNodes) {
+    public RepulsionForceDegreeBasedLinear(double forceIntensity, boolean effectFromFixedNodes) {
         this.forceIntensity = forceIntensity;
         this.effectFromFixedNodes = effectFromFixedNodes;
     }

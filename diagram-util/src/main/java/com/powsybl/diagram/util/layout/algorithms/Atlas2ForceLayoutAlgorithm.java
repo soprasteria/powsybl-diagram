@@ -7,10 +7,9 @@
  */
 package com.powsybl.diagram.util.layout.algorithms;
 
-import com.powsybl.diagram.util.layout.forces.Force;
-import com.powsybl.diagram.util.layout.forces.AttractToCenterForceByEdgeNumberLinear;
-import com.powsybl.diagram.util.layout.forces.EdgeAttractionForceLinear;
-import com.powsybl.diagram.util.layout.forces.RepulsionForceByEdgeNumberLinear;
+import com.powsybl.diagram.util.layout.forces.*;
+import com.powsybl.diagram.util.layout.forces.AttractToCenterForceDegreeBasedLinear;
+import com.powsybl.diagram.util.layout.forces.RepulsionForceDegreeBasedLinear;
 import com.powsybl.diagram.util.layout.geometry.LayoutContext;
 import com.powsybl.diagram.util.layout.geometry.Point;
 import com.powsybl.diagram.util.layout.geometry.Vector2D;
@@ -67,14 +66,14 @@ public class Atlas2ForceLayoutAlgorithm<V, E> implements LayoutAlgorithm<V, E> {
     private static final double MAX_SPEED_DECREASE_RATIO = 0.7;
 
     public Atlas2ForceLayoutAlgorithm(Atlas2Parameters layoutParameters) {
-        this.forces.add(new RepulsionForceByEdgeNumberLinear<>(
+        this.forces.add(new RepulsionForceDegreeBasedLinear<>(
                 layoutParameters.getRepulsion(),
                 layoutParameters.isActivateRepulsionForceFromFixedPoints()));
         this.forces.add(new EdgeAttractionForceLinear<>(layoutParameters.getEdgeAttraction()));
         if (layoutParameters.isActivateAttractToCenterForce()) {
             // Atlas2 talks about both a unit gravity force and a linear gravity force
             // Both can work, but for your visualization purpose, a linear gravity force which tends to make the graph more compact worked better
-            this.forces.add(new AttractToCenterForceByEdgeNumberLinear<>(layoutParameters.getAttractToCenter()));
+            this.forces.add(new AttractToCenterForceDegreeBasedLinear<>(layoutParameters.getAttractToCenter()));
         }
         this.layoutParameters = layoutParameters;
     }
