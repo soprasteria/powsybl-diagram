@@ -108,7 +108,6 @@ public class Atlas2ForceLayoutAlgorithm<V, E> implements LayoutAlgorithm<V, E> {
         }
         int i = 0;
         int stoppingStep = layoutParameters.getMaxSteps();
-        boolean changedStoppingStep = false;
 
         while (i < stoppingStep) {
             double graphSwing = 0.;
@@ -149,12 +148,8 @@ public class Atlas2ForceLayoutAlgorithm<V, E> implements LayoutAlgorithm<V, E> {
             // calculate D(n) the displacement of each node n
             // reset forces on all points (we create a new vector2D so it won't affect forces in the map of forces)
             updateAllPositions(layoutContext, newGraphSpeed, swingMap, previousForces);
-            if (!changedStoppingStep && isStable(newGraphSpeed, stoppingGlobalGraphSpeed)) {
-                stoppingStep = Math.min(
-                        layoutParameters.getMaxSteps(),
-                        (int) (i * (1 + layoutParameters.getIterationNumberIncreasePercent() / 100))
-                );
-                changedStoppingStep = true;
+            if (isStable(newGraphSpeed, stoppingGlobalGraphSpeed)) {
+                break;
             }
             previousGraphSpeed = newGraphSpeed;
             ++i;

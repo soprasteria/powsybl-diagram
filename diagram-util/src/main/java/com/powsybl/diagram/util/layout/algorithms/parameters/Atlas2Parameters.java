@@ -21,7 +21,6 @@ public final class Atlas2Parameters {
     private static final double DEFAULT_MAX_GLOBAL_SPEED_INCREASE_RATIO = 1.5;
     private static final boolean DEFAULT_REPULSION_FORCE_FROM_FIXED_POINTS_ENABLED = true;
     private static final boolean DEFAULT_ATTRACT_TO_CENTER_FORCE_ENABLED = true;
-    private static final double DEFAULT_ITERATION_NUMBER_INCREASE_PERCENT = 0;
 
     private final int maxSteps;
     private final double repulsion;
@@ -33,7 +32,6 @@ public final class Atlas2Parameters {
     private final double maxGlobalSpeedIncreaseRatio;
     private final boolean repulsionForceFromFixedPointsEnabled;
     private final boolean attractToCenterForceEnabled;
-    private final double iterationNumberIncreasePercent;
 
     private Atlas2Parameters(
             int maxSteps,
@@ -45,8 +43,7 @@ public final class Atlas2Parameters {
             double swingTolerance,
             double maxGlobalSpeedIncreaseRatio,
             boolean repulsionForceFromFixedPointsEnabled,
-            boolean attractToCenterForceEnabled,
-            double iterationNumberIncreasePercent
+            boolean attractToCenterForceEnabled
     ) {
         this.maxSteps = maxSteps;
         this.repulsion = repulsion;
@@ -58,7 +55,6 @@ public final class Atlas2Parameters {
         this.maxGlobalSpeedIncreaseRatio = maxGlobalSpeedIncreaseRatio;
         this.repulsionForceFromFixedPointsEnabled = repulsionForceFromFixedPointsEnabled;
         this.attractToCenterForceEnabled = attractToCenterForceEnabled;
-        this.iterationNumberIncreasePercent = iterationNumberIncreasePercent;
     }
 
     public static class Builder {
@@ -72,7 +68,6 @@ public final class Atlas2Parameters {
         private double maxGlobalSpeedIncreaseRatio = DEFAULT_MAX_GLOBAL_SPEED_INCREASE_RATIO;
         private boolean repulsionForceFromFixedPointsEnabled = DEFAULT_REPULSION_FORCE_FROM_FIXED_POINTS_ENABLED;
         private boolean attractToCenterForceEnabled = DEFAULT_ATTRACT_TO_CENTER_FORCE_ENABLED;
-        private double iterationNumberIncreasePercent = DEFAULT_ITERATION_NUMBER_INCREASE_PERCENT;
 
         /**
          * Change the maximum number of iteration the algorithm is allowed to run,
@@ -191,23 +186,6 @@ public final class Atlas2Parameters {
             return this;
         }
 
-        /**
-         * By how many iteration (in percent) you want to increase the run once the stopping condition was met.
-         * The stopping condition generally stops when the graph is "good enough", but for specific use you might want a graph that looks better.
-         * Increasing the number of iterations past the stopping condition will increase the visual quality of the graph, but it will also take longer.
-         * This coefficient will also be directly the increase in runtime (e.g. if you use 10%, you will have a 10% longer runtime).
-         * Default is {@value DEFAULT_ITERATION_NUMBER_INCREASE_PERCENT}
-         * @param iterationNumberIncreasePercent how many more iterations (in percent) you want the run to last
-         * @return the instance of this Builder with the `iterationNumberIncreasePercent` changed
-         */
-        public Builder withIterationNumberIncreasePercent(double iterationNumberIncreasePercent) {
-            if (iterationNumberIncreasePercent < 0) {
-                throw new IllegalArgumentException("iterationNumberIncreasePercent should be strictly positive, as the number of iterations cannot be reduced to less than the stopping criterion");
-            }
-            this.iterationNumberIncreasePercent = iterationNumberIncreasePercent;
-            return this;
-        }
-
         public Atlas2Parameters build() {
             return new Atlas2Parameters(
                     maxSteps,
@@ -219,8 +197,7 @@ public final class Atlas2Parameters {
                     swingTolerance,
                     maxGlobalSpeedIncreaseRatio,
                     repulsionForceFromFixedPointsEnabled,
-                    attractToCenterForceEnabled,
-                    iterationNumberIncreasePercent
+                    attractToCenterForceEnabled
             );
         }
     }
@@ -265,8 +242,5 @@ public final class Atlas2Parameters {
         return attractToCenterForceEnabled;
     }
 
-    public double getIterationNumberIncreasePercent() {
-        return iterationNumberIncreasePercent;
-    }
 }
 
