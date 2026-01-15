@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2025, RTE (http://www.rte-france.com)
+ * Copyright (c) 2025-2026, RTE (http://www.rte-france.com)
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -85,15 +85,15 @@ public class Layout<V, E> {
      */
     public void run(LayoutContext<V, E> layoutContext) {
         Objects.requireNonNull(layoutContext);
+        runAndLogElapsedTime("Setup", () -> setup.run(layoutContext));
+        runAndLogElapsedTime("Layout calculations", () -> layoutAlgorithm.run(layoutContext));
+        runAndLogElapsedTime("Post-processing", () -> postProcessing.run(layoutContext));
+    }
+
+    private void runAndLogElapsedTime(String phaseName, Runnable phase) {
         long start = System.nanoTime();
-        setup.run(layoutContext);
-        long setupEnd = System.nanoTime();
-        LOGGER.info("Setup took {} s", (setupEnd - start) / 1e9);
-        layoutAlgorithm.run(layoutContext);
-        long algorithmEnd = System.nanoTime();
-        LOGGER.info("Layout calculations took {} s", (algorithmEnd - setupEnd) / 1e9);
-        postProcessing.run(layoutContext);
-        long postProcessingEnd = System.nanoTime();
-        LOGGER.info("Post-processing took {} s", (postProcessingEnd - algorithmEnd) / 1e9);
+        phase.run();
+        long end = System.nanoTime();
+        LOGGER.info("{} took {} s", phaseName, (end - start) / 1e9);
     }
 }
