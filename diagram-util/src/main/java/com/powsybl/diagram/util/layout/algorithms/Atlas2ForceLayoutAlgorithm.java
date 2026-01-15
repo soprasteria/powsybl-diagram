@@ -68,9 +68,9 @@ public class Atlas2ForceLayoutAlgorithm<V, E> implements LayoutAlgorithm<V, E> {
     public Atlas2ForceLayoutAlgorithm(Atlas2Parameters layoutParameters) {
         this.forces.add(new RepulsionForceDegreeBasedLinear<>(
                 layoutParameters.getRepulsion(),
-                layoutParameters.isActivateRepulsionForceFromFixedPoints()));
+                layoutParameters.isRepulsionForceFromFixedPointsEnabled()));
         this.forces.add(new EdgeAttractionForceLinear<>(layoutParameters.getEdgeAttraction()));
-        if (layoutParameters.isActivateAttractToCenterForce()) {
+        if (layoutParameters.isAttractToCenterForceEnabled()) {
             // Atlas2 talks about both a unit gravity force and a linear gravity force
             // Both can work, but for your visualization purpose, a linear gravity force which tends to make the graph more compact worked better
             this.forces.add(new AttractToCenterForceDegreeBasedLinear<>(layoutParameters.getAttractToCenter()));
