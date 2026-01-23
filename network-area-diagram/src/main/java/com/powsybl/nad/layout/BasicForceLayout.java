@@ -19,6 +19,8 @@ import com.powsybl.nad.model.Graph;
 import com.powsybl.nad.model.Node;
 import com.powsybl.nad.model.Point;
 import com.powsybl.nad.model.TextNode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 import java.util.Optional;
@@ -29,6 +31,8 @@ import java.util.stream.Collectors;
  * @author Florian Dupuy {@literal <florian.dupuy at rte-france.com>}
  */
 public class BasicForceLayout extends AbstractLayout {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(BasicForceLayout.class);
 
     private static final int SCALE = 100;
 
@@ -60,6 +64,14 @@ public class BasicForceLayout extends AbstractLayout {
                     .withMaxSteps(layoutParameters.getMaxSteps())
                     .withTimeoutSeconds(layoutParameters.getTimeoutSeconds())
                     .build();
+        } else {
+            //TODO remove this once maxSteps and timeout are properly passed
+            if (parameters.getMaxSteps() != layoutParameters.getMaxSteps()) {
+                LOGGER.warn("The max steps of layoutParameters and BasicForceLayoutParameters are different, ignoring layoutParameters");
+            }
+            if (parameters.getTimeoutSeconds() != layoutParameters.getTimeoutSeconds()) {
+                LOGGER.warn("The timeout of layoutParameters and BasicForceLayoutParameters are different, ignoring layoutParameters");
+            }
         }
         Layout<Node, Edge> layout = new Layout<>(
                 new SquareRandomBarycenterSetup<>(),
