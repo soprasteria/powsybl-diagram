@@ -44,10 +44,6 @@ public class RepulsionForceDegreeBasedNoOverlapLinear<V, E> extends AbstractNoOv
         // init point size
         super.init(layoutContext);
         this.repulsionZoneRadius = this.repulsionZoneRatio * this.pointSize;
-        // TODO init vertex degree, same as AbstractDegreeBasedForce, maybe we should make that an interface with a default method instead of an abstract class
-        for (Map.Entry<V, Point> entry : layoutContext.getAllPoints().entrySet()) {
-            entry.getValue().setPointVertexDegree(layoutContext.getSimpleGraph().degreeOf(entry.getKey()));
-        }
     }
 
     @Override

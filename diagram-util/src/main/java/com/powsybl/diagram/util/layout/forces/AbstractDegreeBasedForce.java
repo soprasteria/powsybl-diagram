@@ -8,9 +8,6 @@
 package com.powsybl.diagram.util.layout.forces;
 
 import com.powsybl.diagram.util.layout.geometry.LayoutContext;
-import com.powsybl.diagram.util.layout.geometry.Point;
-
-import java.util.Map;
 
 /**
  * Abstract class for all the forces that need the number of edges of a point for its calculations
@@ -19,9 +16,7 @@ import java.util.Map;
 public abstract class AbstractDegreeBasedForce<V, E> implements Force<V, E> {
     @Override
     public void init(LayoutContext<V, E> layoutContext) {
-        for (Map.Entry<V, Point> entry : layoutContext.getAllPoints().entrySet()) {
-            entry.getValue().setPointVertexDegree(layoutContext.getSimpleGraph().degreeOf(entry.getKey()));
-        }
+        layoutContext.initDegree();
     }
 }
 
