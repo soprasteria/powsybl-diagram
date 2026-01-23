@@ -59,8 +59,8 @@ public class BasicForceLayout extends AbstractLayout {
         org.jgrapht.Graph<Node, Edge> jgraphtGraph = graph.getJgraphtGraph(layoutParameters.isTextNodesForceLayout());
         if (parameters == null) {
             parameters = new BasicForceLayoutParameters.Builder()
-                    .withAttractToCenterForceEnabled(attractToCenterForce)
-                    .withRepulsionForceFromFixedPointsEnabled(repulsionForceFromFixedPoints)
+                    .withAttractToCenterEnabled(attractToCenterForce)
+                    .withRepulsionFromFixedPointsEnabled(repulsionForceFromFixedPoints)
                     .withMaxSteps(layoutParameters.getMaxSteps())
                     .withTimeoutSeconds(layoutParameters.getTimeoutSeconds())
                     .build();

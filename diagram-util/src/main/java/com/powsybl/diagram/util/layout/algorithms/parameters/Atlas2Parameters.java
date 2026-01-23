@@ -19,8 +19,8 @@ public final class Atlas2Parameters {
     private static final double DEFAULT_MAX_SPEED_FACTOR = 10;
     private static final double DEFAULT_SWING_TOLERANCE = 1;
     private static final double DEFAULT_MAX_GLOBAL_SPEED_INCREASE_RATIO = 1.5;
-    private static final boolean DEFAULT_REPULSION_FORCE_FROM_FIXED_POINTS_ENABLED = true;
-    private static final boolean DEFAULT_ATTRACT_TO_CENTER_FORCE_ENABLED = true;
+    private static final boolean DEFAULT_REPULSION_FROM_FIXED_POINTS_ENABLED = true;
+    private static final boolean DEFAULT_ATTRACT_TO_CENTER_ENABLED = true;
 
     private final int maxSteps;
     private final double repulsion;
@@ -30,8 +30,8 @@ public final class Atlas2Parameters {
     private final double maxSpeedFactor;
     private final double swingTolerance;
     private final double maxGlobalSpeedIncreaseRatio;
-    private final boolean repulsionForceFromFixedPointsEnabled;
-    private final boolean attractToCenterForceEnabled;
+    private final boolean repulsionFromFixedPointsEnabled;
+    private final boolean attractToCenterEnabled;
 
     private Atlas2Parameters(
             int maxSteps,
@@ -42,8 +42,8 @@ public final class Atlas2Parameters {
             double maxSpeedFactor,
             double swingTolerance,
             double maxGlobalSpeedIncreaseRatio,
-            boolean repulsionForceFromFixedPointsEnabled,
-            boolean attractToCenterForceEnabled
+            boolean repulsionFromFixedPointsEnabled,
+            boolean attractToCenterEnabled
     ) {
         this.maxSteps = maxSteps;
         this.repulsion = repulsion;
@@ -53,8 +53,8 @@ public final class Atlas2Parameters {
         this.maxSpeedFactor = maxSpeedFactor;
         this.swingTolerance = swingTolerance;
         this.maxGlobalSpeedIncreaseRatio = maxGlobalSpeedIncreaseRatio;
-        this.repulsionForceFromFixedPointsEnabled = repulsionForceFromFixedPointsEnabled;
-        this.attractToCenterForceEnabled = attractToCenterForceEnabled;
+        this.repulsionFromFixedPointsEnabled = repulsionFromFixedPointsEnabled;
+        this.attractToCenterEnabled = attractToCenterEnabled;
     }
 
     public static class Builder {
@@ -66,8 +66,8 @@ public final class Atlas2Parameters {
         private double maxSpeedFactor = DEFAULT_MAX_SPEED_FACTOR;
         private double swingTolerance = DEFAULT_SWING_TOLERANCE;
         private double maxGlobalSpeedIncreaseRatio = DEFAULT_MAX_GLOBAL_SPEED_INCREASE_RATIO;
-        private boolean repulsionForceFromFixedPointsEnabled = DEFAULT_REPULSION_FORCE_FROM_FIXED_POINTS_ENABLED;
-        private boolean attractToCenterForceEnabled = DEFAULT_ATTRACT_TO_CENTER_FORCE_ENABLED;
+        private boolean repulsionFromFixedPointsEnabled = DEFAULT_REPULSION_FROM_FIXED_POINTS_ENABLED;
+        private boolean attractToCenterEnabled = DEFAULT_ATTRACT_TO_CENTER_ENABLED;
 
         /**
          * Change the maximum number of iteration the algorithm is allowed to run,
@@ -166,23 +166,23 @@ public final class Atlas2Parameters {
 
         /**
          * If set to true, other points will get a repulsion effect from unmovable points (fixed points),
-         * default is {@value DEFAULT_REPULSION_FORCE_FROM_FIXED_POINTS_ENABLED}
-         * @param activateRepulsionForceFromFixedPoints whether you want to activate repulsion from fixed points or not
-         * @return the instance of this Builder with the `activateRepulsionForceFromFixedPoints` changed
+         * default is {@value DEFAULT_REPULSION_FROM_FIXED_POINTS_ENABLED}
+         * @param repulsionFromFixedPointsEnabled whether you want to activate repulsion from fixed points or not
+         * @return the instance of this Builder with the `repulsionFromFixedPointsEnabled` changed
          */
-        public Builder withRepulsionForceFromFixedPointsEnabled(boolean activateRepulsionForceFromFixedPoints) {
-            this.repulsionForceFromFixedPointsEnabled = activateRepulsionForceFromFixedPoints;
+        public Builder withRepulsionFromFixedPointsEnabled(boolean repulsionFromFixedPointsEnabled) {
+            this.repulsionFromFixedPointsEnabled = repulsionFromFixedPointsEnabled;
             return this;
         }
 
         /**
          * Activate or deactivate the force that attracts points to the center of the graph. It is used to prevent non-connected points
-         * from drifting away, default is {@value DEFAULT_ATTRACT_TO_CENTER_FORCE_ENABLED}
-         * @param activateAttractToCenterForce activate or deactivate the center attraction force
-         * @return the instance of this Builder with the `activateAttractToCenterForce` changed
+         * from drifting away, default is {@value DEFAULT_ATTRACT_TO_CENTER_ENABLED}
+         * @param attractToCenterEnabled activate or deactivate the center attraction force
+         * @return the instance of this Builder with the `attractToCenterEnabled` changed
          */
-        public Builder withAttractToCenterForceEnabled(boolean activateAttractToCenterForce) {
-            this.attractToCenterForceEnabled = activateAttractToCenterForce;
+        public Builder withAttractToCenterEnabled(boolean attractToCenterEnabled) {
+            this.attractToCenterEnabled = attractToCenterEnabled;
             return this;
         }
 
@@ -196,8 +196,8 @@ public final class Atlas2Parameters {
                     maxSpeedFactor,
                     swingTolerance,
                     maxGlobalSpeedIncreaseRatio,
-                    repulsionForceFromFixedPointsEnabled,
-                    attractToCenterForceEnabled
+                    repulsionFromFixedPointsEnabled,
+                    attractToCenterEnabled
             );
         }
     }
@@ -234,12 +234,12 @@ public final class Atlas2Parameters {
         return maxGlobalSpeedIncreaseRatio;
     }
 
-    public boolean isRepulsionForceFromFixedPointsEnabled() {
-        return repulsionForceFromFixedPointsEnabled;
+    public boolean isRepulsionFromFixedPointsEnabled() {
+        return repulsionFromFixedPointsEnabled;
     }
 
-    public boolean isAttractToCenterForceEnabled() {
-        return attractToCenterForceEnabled;
+    public boolean isAttractToCenterEnabled() {
+        return attractToCenterEnabled;
     }
 
 }

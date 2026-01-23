@@ -24,8 +24,8 @@ class BasicForceLayoutAlgorithmParametersTest {
                 .withRepulsion(7.9)
                 .withFriction(-3.4)
                 .withMaxSpeed(107)
-                .withRepulsionForceFromFixedPointsEnabled(false)
-                .withAttractToCenterForceEnabled(false)
+                .withRepulsionFromFixedPointsEnabled(false)
+                .withAttractToCenterEnabled(false)
                 .build();
 
         assertEquals(324, parameters.getMaxSteps());
@@ -34,7 +34,7 @@ class BasicForceLayoutAlgorithmParametersTest {
         assertEquals(7.9, parameters.getRepulsion());
         assertEquals(-3.4, parameters.getFriction());
         assertEquals(107, parameters.getMaxSpeed());
-        assertFalse(parameters.isRepulsionForceFromFixedPointsEnabled());
-        assertFalse(parameters.isAttractToCenterForceEnabled());
+        assertFalse(parameters.isRepulsionFromFixedPointsEnabled());
+        assertFalse(parameters.isAttractToCenterEnabled());
     }
 }
