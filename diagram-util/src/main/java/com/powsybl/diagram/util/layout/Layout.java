@@ -13,7 +13,6 @@ import com.powsybl.diagram.util.layout.geometry.LayoutContext;
 import com.powsybl.diagram.util.layout.algorithms.LayoutAlgorithm;
 import com.powsybl.diagram.util.layout.algorithms.BasicForceLayoutAlgorithm;
 import com.powsybl.diagram.util.layout.algorithms.parameters.BasicForceLayoutParameters;
-import com.powsybl.diagram.util.layout.postprocessing.NoPostProcessing;
 import com.powsybl.diagram.util.layout.postprocessing.OverlapPreventionPostProcessing;
 import com.powsybl.diagram.util.layout.postprocessing.PostProcessing;
 import com.powsybl.diagram.util.layout.setup.Setup;
@@ -61,7 +60,7 @@ public class Layout<V, E> {
                 new BasicForceLayoutAlgorithm<>(
                         new BasicForceLayoutParameters.Builder().build()
                 ),
-                new NoPostProcessing<>()
+                PostProcessing.noOp()
         );
     }
 
