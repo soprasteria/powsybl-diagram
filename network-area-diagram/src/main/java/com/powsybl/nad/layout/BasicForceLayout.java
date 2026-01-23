@@ -32,31 +32,39 @@ public class BasicForceLayout extends AbstractLayout {
 
     private static final int SCALE = 100;
 
-    private final boolean repulsionForceFromFixedPoints;
-    private final boolean attractToCenterForce;
+    private boolean repulsionForceFromFixedPoints = true;
+    private boolean attractToCenterForce = true;
+    private BasicForceLayoutParameters parameters = null;
 
-    //TODO maybe deprecate this in favour of directly giving the BasicForceLayoutParameters, to be consistent with Atlas2ForceLayout
     public BasicForceLayout() {
-        this(true, true);
+        //TODO replace this by a call to new BasicForceLayoutParameters.Builder().build() once both booleans are removed
     }
 
+    @Deprecated(since = "5.3.0", forRemoval = true)
     BasicForceLayout(boolean repulsionForceFromFixedPoints, boolean attractToCenterForce) {
         this.repulsionForceFromFixedPoints = repulsionForceFromFixedPoints;
         this.attractToCenterForce = attractToCenterForce;
     }
 
+    BasicForceLayout(BasicForceLayoutParameters parameters) {
+        this.parameters = parameters;
+    }
+
     @Override
     protected void nodesLayout(Graph graph, LayoutParameters layoutParameters) {
         org.jgrapht.Graph<Node, Edge> jgraphtGraph = graph.getJgraphtGraph(layoutParameters.isTextNodesForceLayout());
+        if (parameters == null) {
+            parameters = new BasicForceLayoutParameters.Builder()
+                    .withAttractToCenterForceEnabled(attractToCenterForce)
+                    .withRepulsionForceFromFixedPointsEnabled(repulsionForceFromFixedPoints)
+                    .withMaxSteps(layoutParameters.getMaxSteps())
+                    .withTimeoutSeconds(layoutParameters.getTimeoutSeconds())
+                    .build();
+        }
         Layout<Node, Edge> layout = new Layout<>(
                 new SquareRandomBarycenterSetup<>(),
                 new BasicForceLayoutAlgorithm<>(
-                        new BasicForceLayoutParameters.Builder()
-                                .withAttractToCenterForceEnabled(attractToCenterForce)
-                                .withRepulsionForceFromFixedPointsEnabled(repulsionForceFromFixedPoints)
-                                .withMaxSteps(layoutParameters.getMaxSteps())
-                                .withTimeoutSeconds(layoutParameters.getTimeoutSeconds())
-                                .build()
+                        parameters
                 ),
                 PostProcessing.noOp()
         );
