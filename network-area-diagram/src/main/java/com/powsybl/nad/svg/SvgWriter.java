@@ -813,15 +813,9 @@ public class SvgWriter {
     }
 
     private void drawTextNodes(Graph graph, XMLStreamWriter writer) throws XMLStreamException {
-        Collection<Pair<VoltageLevelNode, TextNode>> nodePairs = graph.getVoltageLevelTextPairs();
-        if (nodePairs.stream()
-            .noneMatch(nodePair -> nodePair.getSecond() != null)) {
-            // Do not write the section if there is no text node to display
-            return;
-        }
         writer.writeStartElement(GROUP_ELEMENT_NAME);
         writer.writeAttribute(CLASS_ATTRIBUTE, StyleProvider.TEXT_NODES_CLASS);
-        for (Pair<VoltageLevelNode, TextNode> nodePair : nodePairs) {
+        for (Pair<VoltageLevelNode, TextNode> nodePair : graph.getVoltageLevelTextPairs()) {
             writeTextNode(writer, nodePair.getFirst(), nodePair.getSecond());
         }
         writer.writeEndElement();
