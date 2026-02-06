@@ -116,22 +116,22 @@
     "busNode1" : "4",
     "busNode2" : "8",
     "type" : "LineEdge",
-    "edgeInfo1" : {
+    "edgeSide1" : [ {
       "svgId" : "10",
       "infoTypeA" : "ActivePower",
       "infoTypeB" : "Current",
       "direction" : "OUT",
       "labelA" : "1,400",
       "labelB" : "2,102"
-    },
-    "edgeInfo2" : {
+    } ],
+    "edgeSide2" : [ {
       "svgId" : "11",
       "infoTypeA" : "ActivePower",
       "infoTypeB" : "Current",
       "direction" : "OUT",
       "labelA" : "1,410",
       "labelB" : "2,068"
-    },
+    } ],
     "edgeInfoMiddle" : {
       "svgId" : "12",
       "infoTypeA" : "Name",
